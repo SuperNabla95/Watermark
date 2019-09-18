@@ -27,8 +27,8 @@ int main(int argc, char* argv[]){
     std::cout << "Start" << std::endl;
     std::cout << "Computing" << std::endl;
 
-	wd.init_root(wd);
-	wd.join_root();
+	wd.init_job();
+	wd.exit_job();
 
     std::cout << "Saving" << std::endl;
 	int counter = 0;
