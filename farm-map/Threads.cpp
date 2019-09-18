@@ -149,6 +149,7 @@ int main(int argc, char* argv[]){
     Image *wmark = new Image(wmark_path);
     char *dst_path = "./qui";
 
+    cout << "Computing" << endl;
     Threads t(nw,nt,images,wmark);
     t.do_job();
 
