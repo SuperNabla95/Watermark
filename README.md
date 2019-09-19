@@ -31,12 +31,12 @@ The compilation process will output the executable `watermark`. In the case of `
 ```
 
 :exclamation: Pay attention :warning: at the following **specifications**:
-- The watermark picture must have three channels (RGB); and i
-- ts dimensions (i.e. width and height) must be greater or equal than the dimensions of any inpu image;
+- The watermark picture must have three channels (RGB); and
+- the dimensions (i.e. width and height) must be greater or equal than the dimensions of any input images;
 
 ----
 ## Visualize the time statistics :chart_with_upwards_trend:
-After that the program terminates, you can run the `plot_timeline.py` to visualize a barchart reporting the time spent by the threads in the different areas of the code. 
+After the program termination, you can run the `plot_timeline.py` to generate a barchart reporting the time spent by the threads in different regions of code.
 ```bash
 #example
 python3 plot_timeline.py farm-map_2_4.txt
