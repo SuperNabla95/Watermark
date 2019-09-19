@@ -3,7 +3,7 @@
 
 ----
 ## What is all about? :mega:
-from the :globe_with_meridians:[Wikipedia](https://en.wikipedia.org/wiki/Digital_watermarking) page:
+from the :globe_with_meridians:[Wikipedia page](https://en.wikipedia.org/wiki/Digital_watermarking):
 
 > "A digital **watermark** is a kind of marker covertly embedded in a noise-tolerant signal such as [...] **image** data. It is typically used to identify ownership of the copyright of such signal.
 
