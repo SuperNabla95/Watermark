@@ -36,7 +36,7 @@ The compilation process will output the executable `watermark`. In the case of `
 
 ----
 ## Visualize the time statistics :chart_with_upwards_trend:
-After the program termination, you can run the `plot_timeline.py` to generate a barchart reporting the time spent by the threads in different regions of code.
+After the program termination, you can run the `plot_timeline.py` script to generate a barchart reporting the time spent by the threads in different regions of code.
 ```bash
 #example
 python3 plot_timeline.py farm-map_2_4.txt
