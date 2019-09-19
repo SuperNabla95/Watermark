@@ -4,15 +4,19 @@
 
 //#include "Image.cpp"
 #include "Reader.cpp"
+#include "Timer.cpp"
 
 using namespace std;
 
 #define ROOT 0
 
+#define PRINT_STATS true
+
 class Threads{
   private:
     vector<Image> *_imagevec;
     Image *_wmark;
+    Timer *_timer;
 
     /*inline thread* operator[](int wid) 
     { 
@@ -23,7 +27,7 @@ class Threads{
     const int nw;
     const int nt;
 
-    Threads(int nw, int nt, vector<Image> *vimage, Image *wmark);
+    Threads(int nw, int nt, vector<Image> *vimage, Image *wmark, Timer *timer);
     //~Threads();
     void do_job();
 
@@ -58,11 +62,12 @@ class Threads{
 
         void operator() (Threads *outer, int wid, int tid)
         {
+            if(PRINT_STATS){outer->_timer->register_event(wid,tid,MAP_OPS);}
             vector<thread> v(2);
             init_map(outer,v.data(),wid,tid);
-            cout << to_string(wid) + "-->" + to_string(tid) + " eccoci\n";
             int num_images = outer->_imagevec->size();
             for(int img=wid;img<num_images;img+=outer->nw){
+                if(PRINT_STATS){outer->_timer->register_event(wid,tid,NEW_IMAGE);}
                 Image src = (*(outer->_imagevec))[img];
                 for (int r=tid;r<src.height();r+=outer->nt){
                     for(int c=0;c<src.width();c++){
@@ -81,7 +86,9 @@ class Threads{
                     }
                 }
             }
+            if(PRINT_STATS){outer->_timer->register_event(wid,tid,MAP_OPS);}
             exit_map(outer,v.data(),wid,tid);
+            if(PRINT_STATS){outer->_timer->register_event(wid,tid,MAP_OPS);}
         }   
     };//end struct map_pattern
 
@@ -112,20 +119,24 @@ class Threads{
 
         void operator() (Threads *outer,int wid) 
         {
+            if(PRINT_STATS){outer->_timer->register_event(wid,ROOT,FARM_OPS);}
             vector<thread> v(2);
             init_farm(outer,v.data(),wid);
             map_pattern()(outer,wid,ROOT);
+            if(PRINT_STATS){outer->_timer->register_event(wid,ROOT,FARM_OPS);}
             exit_farm(outer,v.data(),wid);
+            if(PRINT_STATS){outer->_timer->register_event(wid,ROOT,DONE);}
         }   
     };//end struct farm_pattern
     
 }; //end class Threads
 
-Threads::Threads(int nw,int nt,vector<Image> *vimage,Image *wmark) :
+Threads::Threads(int nw,int nt,vector<Image> *vimage,Image *wmark,Timer *timer) :
   nw(nw),
   nt(nt),
   _imagevec(vimage),
-  _wmark(wmark)
+  _wmark(wmark),
+  _timer(timer)
 {
 
 }
@@ -134,7 +145,7 @@ void Threads::do_job(){
     farm_pattern()(this,ROOT);
 }
 
-int main(int argc, char* argv[]){
+/*int main(int argc, char* argv[]){
 	if(argc != 2+1){
 		cout << "Usage is: " << argv[0] << " <nw> nt>" << endl;
         return -1;
@@ -143,14 +154,16 @@ int main(int argc, char* argv[]){
     nw = atoi(argv[1]);
     nt = atoi(argv[2]);
 
-    char *src_dir_path = "/home/ftosoni/Desktop/spm/repo/small";
-    char *wmark_path = "/home/ftosoni/Desktop/spm/repo/small/logo_small.png";
+    char *src_dir_path = "/home/ftosoni/Desktop/spm/repo/large";
+    char *wmark_path = "/home/ftosoni/Desktop/spm/repo/large/logo_large.png";
 	imagevec *images = load_images(src_dir_path);
     Image *wmark = new Image(wmark_path);
+    Timer *timer = new Timer(nw,nt);
     char *dst_path = "./qui";
 
+
     cout << "Computing" << endl;
-    Threads t(nw,nt,images,wmark);
+    Threads t(nw,nt,images,wmark,timer);
     t.do_job();
 
     cout << "Saving" << endl;
@@ -162,6 +175,7 @@ int main(int argc, char* argv[]){
 		img.save_bmp(ch);
 		counter++;
 	}
+    timer->print_data();
     return 0;
-}
+}*/
 
