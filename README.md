@@ -5,9 +5,9 @@
 ## What is all about? :mega:
 from the :globe_with_meridians:[Wikipedia](https://en.wikipedia.org/wiki/Digital_watermarking) page:
 
-> "A digital **watermark** is a kind of marker covertly embedded in a noise-tolerant signal such as [...] **image** data. It is typically used to identify ownership of the copyright of such signal. .
+> "A digital **watermark** is a kind of marker covertly embedded in a noise-tolerant signal such as [...] **image** data. It is typically used to identify ownership of the copyright of such signal.
 
->The needed properties of a digital watermark depend on the use case in which it is applied. For marking media files with **copyright** information, a digital watermark has to be rather robust against modifications that can be applied to the carrier signal. Instead, if **integrity** has to be ensured, a fragile watermark would be applied.".
+>The needed properties of a digital watermark depend on the use case in which it is applied. For marking media files with **copyright** information, a digital watermark has to be rather robust against modifications that can be applied to the carrier signal. Instead, if **integrity** has to be ensured, a fragile watermark would be applied."
 
 ---
 ## The project :pencil:
@@ -24,7 +24,7 @@ At this point from the `bash` you can compile the code using  `make`.
 ```bash
 make
 ```
-The compilation process will output the executable `watermark`. In the case of `farm-map` you can then **executing** it specifying (in order) the following arguments: the path to the directory that contains the images, the path to the watermark image, the path to the output directory, the number of workers of the farm, and the number of threads for each of the worker of the farm (i.e. the number of workers of each map).
+The compilation process will output the `watermark` executable. In the case of `farm-map` you can then **executing** it specifying (in order) the following arguments: the path to the directory that contains the images, the path to the watermark image, the path to the output directory, the number of workers of the farm, and the number of threads for each of the worker of the farm (i.e. the number of workers of each map).
 ```bash
 #example
 ./watermark ~/source/directory/path/ ~/watermark/path/  ~/output/directory/path/ 2 4
