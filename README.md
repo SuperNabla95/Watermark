@@ -24,7 +24,7 @@ At this point from the `bash` you can compile the code using  `make`.
 ```bash
 make
 ```
-The compilation process will output the `watermark` executable. In the case of `farm-map` you can then **executing** it specifying (in order) the following arguments: the path to the directory that contains the images, the path to the watermark image, the path to the output directory, the number of workers of the farm, and the number of threads for each of the worker of the farm (i.e. the number of workers of each map).
+The compilation process will output the `watermark` executable. In the case -- for instance -- of `farm-map`, you can then **run the program** specifying (in order) the following arguments: the path to the directory that contains the images, the path to the watermark image, the path to the output directory, the number of workers of the farm, and the number of threads for each of the worker of the farm (i.e. the number of workers of each map).
 ```bash
 #example
 ./watermark ~/source/directory/path/ ~/watermark/path/  ~/output/directory/path/ 2 4
